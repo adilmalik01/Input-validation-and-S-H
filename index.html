@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Validation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            background-color: #2f1c3e;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            width: 400px;
+            height: 200px;
+            /* background-color: blueviolet; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .input-div {
+            background-color: aliceblue;
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            margin-bottom: 5px;
+        }
+
+        .input-div i {
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+        .input-div input {
+            width: 250px;
+            font-size: 20px;
+            height: 100%;
+            outline: none;
+            border: none;
+        }
+
+        .para {
+            /* color: chartreuse; */
+            display: none;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="main">
+            <div class="input-div">
+                <input type="password" name="" id="inp">
+                <i class="bi bi-eye-fill" id="show"></i>
+            </div>
+            <p class="para">This is <span id="strength"></span> Password</p>
+        </div>
+    </div>
+
+
+    <script type="module">
+        let showPass = document.querySelector("#show")
+        let inp = document.querySelector("#inp")
+        let para = document.querySelector(".para")
+        let strength = document.querySelector("span")
+
+        showPass.addEventListener("click", (e) => {
+
+            if (inp.type == "password") {
+                inp.type = 'text'
+                showPass.attributes.class.nodeValue = 'bi bi-eye-slash-fill'
+            } else {
+                inp.type = 'password'
+                showPass.attributes.class.nodeValue = 'bi bi-eye-fill'
+            }
+
+        })
+
+        inp.addEventListener("input", (e) => {
+            if (inp.value.length > 0 && inp.value.length < 4) {
+                strength.innerHTML = "weak"
+                para.style.color = 'red'
+                para.style.display = 'block'
+            } else if (inp.value.length >= 5 && inp.value.length < 8) {
+                strength.innerHTML = "medium"
+                para.style.color = 'orange'
+            } else if (inp.value.length > 8) {
+                strength.innerHTML = "Good"
+                para.style.color = 'chartreuse'
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
